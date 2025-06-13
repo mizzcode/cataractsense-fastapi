@@ -5,5 +5,5 @@ python-multipart
 sqlalchemy
 databases
 pydantic
-aiosqlit
+aiosqlite
 sqlmodel
