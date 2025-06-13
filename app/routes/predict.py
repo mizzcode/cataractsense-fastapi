@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 from app.db.database import SessionLocal
 from app.models.models import Prediction
+import os
 
 router = APIRouter()
 
@@ -18,7 +19,8 @@ def get_db():
 async def predict(file: UploadFile = File(...), db: Session = Depends(get_db)):
     try:
         files = {'file': (file.filename, await file.read(), file.content_type)}
-        response = requests.post("http://127.0.0.1:8000/predict", files=files)
+        ML_API_URL = os.getenv("ML_API_URL", "http://127.0.0.1:8000/predict")
+        response = requests.post(ML_API_URL, files=files)
 
         result_data = response.json()
         print("DEBUG response dari ML API:", result_data)
