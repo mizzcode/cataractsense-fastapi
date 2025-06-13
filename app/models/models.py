@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime
 from datetime import datetime
-from app.db.database import Base  # Import Base, bukan engine atau session
+from app.db.database import Base
 from pydantic import BaseModel
 from typing import Optional
 
@@ -20,12 +20,11 @@ class PredictionResponse(BaseModel):
     id: int
     filename: str
     confidence: float
-    result: str | None
+    result: Optional[str]  # Changed from 'str | None'
     timestamp: str
 
     class Config:
         orm_mode = True
-
 
 class User(Base):
     __tablename__ = "users"
@@ -33,7 +32,6 @@ class User(Base):
     username = Column(String, unique=True)
     email = Column(String, unique=True)
     hashed_password = Column(String)
-
 
 class Feedback(Base):
     __tablename__ = "feedbacks"

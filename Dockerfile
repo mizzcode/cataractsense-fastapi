@@ -14,8 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire project
 COPY . .
 
-# Create static/uploads directory for file uploads (if needed)
-RUN mkdir -p static/uploads
+# Create static/uploads and db directories
+RUN mkdir -p static/uploads db
 
 # Expose the port (CataractSense uses 8001)
 EXPOSE 8001
