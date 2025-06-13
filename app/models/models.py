@@ -20,11 +20,11 @@ class PredictionResponse(BaseModel):
     id: int
     filename: str
     confidence: float
-    result: Optional[str]  # Changed from 'str | None'
+    result: Optional[str]  # Fixed from 'str | None'
     timestamp: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True  # Changed from 'orm_mode'
 
 class User(Base):
     __tablename__ = "users"
